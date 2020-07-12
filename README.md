@@ -1,2 +1,1 @@
-**SafeKid- Web Application-Admin Panel**
-# SafeKid
+# SafeKid - Web Application-Admin Panel
