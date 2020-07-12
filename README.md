@@ -10,6 +10,7 @@ git clone [https://github.com/SafeKid/Web_App_Admin_Panel.git](https://github.co
 
 **2. install**
 ```
+cd **
 npm install
 ```
 
