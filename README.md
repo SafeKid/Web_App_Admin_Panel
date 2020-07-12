@@ -4,9 +4,9 @@
 
 
 **1. clone code**
-```
-git clone https://github.com/SafeKid/Web_App_Admin_Panel.git
-```
+
+git clone [https://github.com/SafeKid/Web_App_Admin_Panel.git](https://github.com/SafeKid/Web_App_Admin_Panel.git).
+
 
 **2. install**
 ```
