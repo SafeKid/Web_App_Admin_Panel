@@ -1,7 +1,11 @@
-# SafeKid - Web Application-Admin Panel
+# Safekid 
+
+**My Contribution**
+I'm still developing all the frontend and backend functionalities related to admin panel of web application. 
+
+## Web Application-Admin Panel
 
 **Development**
-
 
 **1. clone code**
 
@@ -23,3 +27,4 @@ npm i firebase
 ```
 npm start
 ```
+
