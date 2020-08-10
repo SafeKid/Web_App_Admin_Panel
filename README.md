@@ -2,11 +2,12 @@
 
 **My Contribution**
 ```
-I'm still developing all the frontend and backend functionalities related to admin panel of web application. There are four main functionalities.
-		Confirm parent's request.
-		Block users.
-		Add areas where child abuses  have occurred before.
-		User reviews and Questions about the product.
+I'm still developing all the frontend and backend functionalities related to admin panel of web application. 
+There are four main functionalities.
+	- Confirm parent's request.
+	- Block users.
+	- Add areas where child abuses  have occurred before.
+	- User reviews and Questions about the product.
 ```
 
 ## Web Application-Admin Panel
