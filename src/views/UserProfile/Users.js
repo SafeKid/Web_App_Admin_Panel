@@ -1,34 +1,14 @@
 import React, { Component } from 'react';
 import  "views/Image.css"
-import firebase from "../../config/firebase.js";
-import Geosuggest from 'react-geosuggest';
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
 
 class Users extends Component{
 
     // call updateUser (App.js)
     handleUpdate = () => {
-        this.props.updateUser(this.indexNum, this.date.value, this.case.value);
+        this.props.updateUser(this.indexNum, this.date.value, this.case1.value, this.location.value);
     }
-
-    getDate = () => 
-  {
-    let date = this.state.date;
-    let dd = date.getDate();
-    let mm = date.getMonth() + 1;
-    let yyyy = date.getFullYear();
-
-    if(dd < 10) {
-      dd = '0' + dd;
-    }
-
-    if(mm < 10) {
-      mm = '0' + mm;
-    }
-
-    let dateString = yyyy + '-' + mm + '-' + dd;
-
-    return dateString;
-  }
 
     render(){
 
@@ -39,33 +19,34 @@ class Users extends Component{
             return user.isEditing === true ? (
                 
                 <tr  key={index}>
-                    <td><input type="date" ref={(val) => {this.date = val}} required defaultValue={user.date}/></td>
-                    <td><input type="text" ref={(val) => {this.case = val}} required defaultValue={user.case}/></td>
+                    <td><input type="date" id="field" ref={(val) => {this.date = val}} required defaultValue={user.date}/></td>
+                    <td><textarea type="text"  id="field" ref={(val) => {this.case1 = val}} required defaultValue={user.case1} rows={5}/></td>
+                    <td><input type="text" id="field" ref={(val) => {this.location = val}} required defaultValue={user.location}/></td>
                     <td>
-                    <input type="button" value="Update" onClick={this.handleUpdate} ref={() => {this.indexNum = index}} className="btn green"/>
+                    <input type="button" value="Update" id="field" onClick={this.handleUpdate} ref={() => {this.indexNum = index}} className="btn green"/>
                     </td>
                 </tr>  
 
             ) : (
 
                 <tr  key={index}>
-                    <td>{user.date}</td>
-                    <td>{user.case}</td>
-                    <td><button className="btn white black-text" onClick={() => pressEditBtn(index)}>Edit</button>  </td>
-                     <td> <button className="btn red" onClick={()=>pressDelete(index)}>Delete</button></td>
+                    <td id="heading">{user.date}</td>
+                    <td id="heading1">{user.case1}</td>
+                    <td id="heading2">{user.location}</td>
+                    <td id="heading3"><button className="btn yellow black-text" onClick={() => pressEditBtn(index)}>Edit </button>   |   <button className="btn purple" onClick={()=>pressDelete(index)}> Delete</button></td>
                 </tr>
-
+                 
             );
         });
 
         return(
-
-            <table>
-                <thead className="thead-dark">
-                    <tr className="bordered">
-                    <th className="length">Date</th>
-                    <th className="length">Previous Cases</th>
-                    <th className="length">Action</th>
+            <table className="striped">
+                <thead >
+                    <tr>
+                    <th >Date</th>
+                    <th >Case</th>
+                    <th>Location</th>
+                    <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>

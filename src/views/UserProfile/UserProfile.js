@@ -1,24 +1,31 @@
-import React, { Component } from 'react';
+import React, { Component,useRef } from 'react';
 import Users from './Users';
 import AddUser from './AddUser';
 import carfix from "assets/img/coverpage.jpg";
 import firebase from "../../config/firebase.js";
-import Geosuggest from 'react-geosuggest';
-import  "views/Image.css"
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import  "views/Image.css";
+
+class UserProfile extends Component{
 
 
-class App extends Component{
+  static defaultProps = {
+    center: { lat: 40.7446790, lng: -73.9485420 },
+  };
 
+ 
     // Default dummy data
     state = {
 
         users:[
-          {date:"2020-02-12", case:"After 3-Year-Old's Death, Bill Would Change Way Child Abuse Cases Are Handled", isEditing:false},
-          {date:"2020-03-14", case:"After 3-Year-Old's Death, Bill Would Change Way Child Abuse Cases Are Handled", isEditing:false},
-          {date:"2020-01-02", case:"After 3-Year-Old's Death, Bill Would Change Way Child Abuse Cases Are Handled", isEditing:false}
+          {date:"2020-02-01", case1:"Nubia Docter Barahona was abused and murdered on February 11, 2011.hfhfhhghfghgffhgfhfghfhgfhgfhfghfhfghfg", location:"Gampaha", isEditing:false},
+          {date:"2020-02-01", case1:"Nubia Docter Barahona was abused and murdered on February 11, 2011.", location:"Gampaha", isEditing:false},
+          {date:"2020-02-01", case1:"Nubia Docter Barahona was abused and murdered on February 11, 2011.", location:"Gampaha", isEditing:false}
     
         ]
       }
+
+      
       // (newUser) is received from AddUser.js
       addUser = (newUser) => {
             let users = [...this.state.users, newUser];
@@ -38,10 +45,11 @@ class App extends Component{
       }
 
       // (i, name, age) is received from Users.js
-      updateUser = (i, name, age) => {
+      updateUser = (i, date, case1, location) => {
         let users = this.state.users;
-        users[i].name = name;
-        users[i].age = age;
+        users[i].date = date;
+        users[i].case1 = case1;
+        users[i].location = location;
         users[i].isEditing = false;
 
         this.setState({
@@ -59,48 +67,48 @@ class App extends Component{
         });
       }
 
-      getDate = () => 
-  {
-    let date = this.state.date;
-    let dd = date.getDate();
-    let mm = date.getMonth() + 1;
-    let yyyy = date.getFullYear();
-
-    if(dd < 10) {
-      dd = '0' + dd;
-    }
-
-    if(mm < 10) {
-      mm = '0' + mm;
-    }
-
-    let dateString = yyyy + '-' + mm + '-' + dd;
-
-    return dateString;
-  }
-      
     render(){
         return(
-          <div
-          className="App"
-          style={{
-            backgroundImage: `url(${carfix})`
-          }}>
-            <link 
-        rel="stylesheet" 
-        href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-        />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+          <div className="App" 
+            style={{backgroundImage: `url(${carfix})`}}>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
             <div className="containers">
                 <h4><b>Posts</b></h4>
                 <Users allUsers={this.state.users} pressEditBtn={this.pressEditBtn} updateUser={this.updateUser} pressDelete={this.pressDelete} />
                 <AddUser addUser={this.addUser}/>
-                <Geosuggest />
             </div>
+
+            <Map 
+            google={this.props.google} 
+            zoom={14}
+            onClick={this.onClick}
+            defaultCenter={ this.props.center }        
+            >
+ 
+            <Marker onClick={this.onMarkerClick}
+                    name={'Current location'}
+                    style={{color: '#ff7777'}}
+                      lat={40.7473310}
+                      lng={-73.8517440}
+                    />
+
+            <InfoWindow onClose={this.onInfoWindowClose}>
+                {/* <div>
+                  <h1>{this.state.selectedPlace.name}</h1>
+                </div> */}
+            </InfoWindow>
+            </Map>
             </div>
-        );
+
+
+           );
     }
 }
 
-export default App;
+
+export default GoogleApiWrapper({
+  apiKey: ("AIzaSyDMMtNaoakN-KNtcut2R2AgOhVJWMAjj7U")
+})(UserProfile)
+

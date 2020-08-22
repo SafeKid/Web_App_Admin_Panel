@@ -26,6 +26,7 @@ import avatar4 from "assets/img/views/face5.jpg";
 import avatar5 from "assets/img/views/man3.jpg";
 import GridContainer from 'components/Grid/GridContainer';
 import GridItem from "components/Grid/GridItem.js";
+import ReviewCard from "./ReviewCard";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,11 +56,40 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecipeReviewCard() {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = React.useState(false);  
+  const [cards, setCards] = React.useState([]);
+  const [selected, setSelected] = React.useState([]);
+
+  React.useEffect(() => { fetchData() }, []);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  const handleAdd = (key, reviewRespond) => {
+    firebase.database().ref('Reviews').child(key).update({respond:reviewRespond})
+  };
+
+  function fetchData(){
+    firebase.database().ref('Reviews').on('value', (snapshot) => {
+      let cards = [];
+      setCards([]);
+      setSelected([]);
+
+      if(snapshot.exists()){
+        snapshot.forEach((reviewData) => {
+          let review = reviewData.val();
+          review.key = reviewData.key;
+
+          cards.push(<ReviewCard review={review} handleAdd={(key, reviewRespond) => handleAdd(key, reviewRespond)} />);
+          
+          setCards([]);
+          setCards(cards);
+        })
+      }
+
+    })
+  }
 
   return (
     <div
@@ -69,473 +99,7 @@ export default function RecipeReviewCard() {
         }}>
           <h3 className="font-color"><b>User Reviews</b></h3>
       <GridContainer>
-      <GridItem xs={12} sm={6} md={3}>
-    <Card className={classes.root}>
-      <CardHeader id="reviewscardheader"
-        avatar={
-          <Avatar profile aria-label="recipe" className={classes.avatar}>
-            <a href="#pablo" onClick={e => e.preventDefault()}>
-               <img src={avatar} alt="..." />
-            </a>
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title="Ayesh Jayasooriya"
-        subheader="June 20, 2020"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        I do like the app. It does everything it says. Although it seems to have a lag time, sometimes it gives me 
-        a warning about my son's text but I can't see it right away. I would like to monitor his social networking better, e
-        specially snap chat and Instagram, where I can see what pictures they are exchanging. Concerned mother of a teen aged boy.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_up_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_down_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-         comment
-        </span>
-       </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          {/* <ExpandMoreIcon /> */}
-        </IconButton>
-      </CardActions>
-    </Card>
-    </GridItem>
-
-    <br/>
-   
-      <GridItem xs={12} sm={6} md={3}>
-    <Card className={classes.root}>
-      <CardHeader id="reviewscardheader"
-        avatar={
-          <Avatar profile aria-label="recipe" className={classes.avatar}>
-            <a href="#pablo" onClick={e => e.preventDefault()}>
-               <img src={avatar1} alt="..." />
-            </a>
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title="Nethma Jayasinghe"
-        subheader="July 14, 2020"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        I do like the app. It does everything it says. Although it seems to have a lag time, sometimes it gives me 
-        a warning about my son's text but I can't see it right away. I would like to monitor his social networking better, e
-        specially snap chat and Instagram, where I can see what pictures they are exchanging. Concerned mother of a teen aged boy.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_up_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_down_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-         comment
-        </span>
-       </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-        
-        </IconButton>
-      </CardActions>
-      </Card>
-    </GridItem>
-
-    <GridItem xs={12} sm={6} md={3}>
-    <Card className={classes.root}>
-      <CardHeader id="reviewscardheader"
-        avatar={
-          <Avatar profile aria-label="recipe" className={classes.avatar}>
-            <a href="#pablo" onClick={e => e.preventDefault()}>
-               <img src={avatar2} alt="..." />
-            </a>
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title="Nethu Jayawardhana"
-        subheader="January 07, 2020"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        I do like the app. It does everything it says. Although it seems to have a lag time, sometimes it gives me 
-        a warning about my son's text but I can't see it right away. I would like to monitor his social networking better, e
-        specially snap chat and Instagram, where I can see what pictures they are exchanging. Concerned mother of a teen aged boy.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_up_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_down_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-         comment
-        </span>
-       </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-        </IconButton>
-      </CardActions>
-    </Card>
-    </GridItem>
-
-    <GridItem xs={12} sm={6} md={3}>
-    <Card className={classes.root}>
-      <CardHeader id="reviewscardheader"
-        avatar={
-          <Avatar profile aria-label="recipe" className={classes.avatar}>
-            <a href="#pablo" onClick={e => e.preventDefault()}>
-               <img src={avatar3} alt="..." />
-            </a>
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title="Danush Abesinghe"
-        subheader="June 01, 2020"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        I do like the app. It does everything it says. Although it seems to have a lag time, sometimes it gives me 
-        a warning about my son's text but I can't see it right away. I would like to monitor his social networking better, e
-        specially snap chat and Instagram, where I can see what pictures they are exchanging. Concerned mother of a teen aged boy.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_up_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_down_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-         comment
-        </span>
-       </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          {/* <ExpandMoreIcon /> */}
-        </IconButton>
-      </CardActions>
-    </Card>
-    </GridItem>
-    </GridContainer>
-
-    <br/>
-
-    <GridContainer>
-      <GridItem xs={12} sm={6} md={3}>
-    <Card className={classes.root}>
-      <CardHeader id="reviewscardheader"
-        avatar={
-          <Avatar profile aria-label="recipe" className={classes.avatar}>
-            <a href="#pablo" onClick={e => e.preventDefault()}>
-               <img src={avatar4} alt="..." />
-            </a>
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title="Saara De Silva"
-        subheader="February 14, 2020"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        I do like the app. It does everything it says. Although it seems to have a lag time, sometimes it gives me 
-        a warning about my son's text but I can't see it right away. I would like to monitor his social networking better, e
-        specially snap chat and Instagram, where I can see what pictures they are exchanging. Concerned mother of a teen aged boy.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_up_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_down_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-         comment
-        </span>
-       </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          {/* <ExpandMoreIcon /> */}
-        </IconButton>
-      </CardActions>
-    </Card>
-    </GridItem>
-
-    <br/>
-   
-      <GridItem xs={12} sm={6} md={3}>
-    <Card className={classes.root}>
-      <CardHeader id="reviewscardheader"
-        avatar={
-          <Avatar profile aria-label="recipe" className={classes.avatar}>
-            <a href="#pablo" onClick={e => e.preventDefault()}>
-               <img src={avatar5} alt="..." />
-            </a>
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title="Vimal Jayasooriya"
-        subheader="June 14, 2020"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        I do like the app. It does everything it says. Although it seems to have a lag time, sometimes it gives me 
-        a warning about my son's text but I can't see it right away. I would like to monitor his social networking better, e
-        specially snap chat and Instagram, where I can see what pictures they are exchanging. Concerned mother of a teen aged boy.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_up_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_down_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-         comment
-        </span>
-       </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-        </IconButton>
-      </CardActions>
-    </Card>
-    </GridItem>
-
-    <GridItem xs={12} sm={6} md={3}>
-    <Card className={classes.root}>
-      <CardHeader id="reviewscardheader"
-        avatar={
-          <Avatar profile aria-label="recipe" className={classes.avatar}>
-            <a href="#pablo" onClick={e => e.preventDefault()}>
-               <img src={avatar1} alt="..." />
-            </a>
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title="Vinusha Perera"
-        subheader="February 09, 2020"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        I do like the app. It does everything it says. Although it seems to have a lag time, sometimes it gives me 
-        a warning about my son's text but I can't see it right away. I would like to monitor his social networking better, e
-        specially snap chat and Instagram, where I can see what pictures they are exchanging. Concerned mother of a teen aged boy.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_up_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_down_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-         comment
-        </span>
-       </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-        </IconButton>
-      </CardActions>
-    </Card>
-    </GridItem>
-
-    <GridItem xs={12} sm={6} md={3}>
-    <Card className={classes.root}>
-      <CardHeader id="reviewscardheader"
-        avatar={
-          <Avatar profile aria-label="recipe" className={classes.avatar}>
-            <a href="#pablo" onClick={e => e.preventDefault()}>
-               <img src={avatar} alt="..." />
-            </a>
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title="Hector Fernando"
-        subheader="March 06, 2020"
-      />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-        I do like the app. It does everything it says. Although it seems to have a lag time, sometimes it gives me 
-        a warning about my son's text but I can't see it right away. I would like to monitor his social networking better, e
-        specially snap chat and Instagram, where I can see what pictures they are exchanging. Concerned mother of a teen aged boy.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_up_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-            thumb_down_alt
-          </span>
-        </IconButton>
-        <IconButton aria-label="share">
-        <span class="material-icons">
-         comment
-        </span>
-       </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-        </IconButton>
-      </CardActions>
-     </Card>
-    </GridItem>
+     {cards}
     </GridContainer>
     </div>
   );

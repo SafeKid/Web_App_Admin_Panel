@@ -293,7 +293,7 @@ export default function EnhancedTable() {
       const date = row.date;
       delete row.date;
       firebase.database().ref('Block_Users').child(date).set(row)
-        .then(()=>alert("Sure to block?"))
+      .then(()=>alert("Sure to block?"))
         .then(() => firebase.database().ref('Devices').child(date).remove()
         );
       
@@ -443,5 +443,3 @@ export default function EnhancedTable() {
     </div>
   );
 }
-
-
