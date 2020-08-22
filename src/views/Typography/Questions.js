@@ -25,7 +25,7 @@ import GridContainer from 'components/Grid/GridContainer';
 import GridItem from "components/Grid/GridItem.js";
 import { ScriptSnapshot } from 'typescript';
 import { Button } from '@material-ui/core';
-import CardComponent from './card';
+import CardComponent from './QuestionsCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
