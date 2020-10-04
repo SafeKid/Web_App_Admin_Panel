@@ -10,28 +10,50 @@ class UserProfile extends Component{
 
 
   static defaultProps = {
-    center: { lat: 40.7446790, lng: -73.9485420 },
-  };
+    center: { lat: 6.927079, lng: 79.861244 },
+  }
 
  
     // Default dummy data
     state = {
 
-        users:[
-          {date:"2020-02-01", case1:"Nubia Docter Barahona was abused and murdered on February 11, 2011.hfhfhhghfghgffhgfhfghfhgfhgfhfghfhfghfg", location:"Gampaha", isEditing:false},
-          {date:"2020-02-01", case1:"Nubia Docter Barahona was abused and murdered on February 11, 2011.", location:"Gampaha", isEditing:false},
-          {date:"2020-02-01", case1:"Nubia Docter Barahona was abused and murdered on February 11, 2011.", location:"Gampaha", isEditing:false}
-    
-        ]
+        users:[],
+        loading: true,
+      }
+
+
+      componentDidMount() {
+        this.fetchCases()
+      }
+
+
+      fetchCases = () => {
+        firebase.database().ref('Previous_Cases').on('value', (snapshot) => {
+          var cases = [];
+          
+          if(snapshot.exists()) {
+            snapshot.forEach((caseSnapshot) => {
+              let caseData = caseSnapshot.val();
+              caseData.key = caseSnapshot.key
+              caseData.isEditing = false;
+
+              cases.push(caseData);
+              
+              this.setState({ users: cases, loading: false })
+            })
+          }
+          else {
+            this.setState({ loading: false })
+          }
+        })
       }
 
       
       // (newUser) is received from AddUser.js
       addUser = (newUser) => {
-            let users = [...this.state.users, newUser];
-            this.setState({
-                users
-            });     
+          const { date, case1, location } = newUser;
+
+          firebase.database().ref('Previous_Cases').push({ date, case1, location })
       }
 
       // when press edit button
@@ -47,6 +69,9 @@ class UserProfile extends Component{
       // (i, name, age) is received from Users.js
       updateUser = (i, date, case1, location) => {
         let users = this.state.users;
+
+        firebase.database().ref('Previous_Cases').child(users[i].key).update({ date, case1, location })
+
         users[i].date = date;
         users[i].case1 = case1;
         users[i].location = location;
@@ -59,6 +84,8 @@ class UserProfile extends Component{
       }
       // (i) is received from Users.js
       pressDelete = (i) => {
+        firebase.database().ref('Previous_Cases').child(this.state.users[i].key).remove()
+        
         let users = this.state.users.filter((u,index)=>{
             return index !== i;
         });
@@ -68,6 +95,12 @@ class UserProfile extends Component{
       }
 
     render(){
+        if(this.state.loading) {
+          return(
+            <div>Loading... Please wait...</div>
+          )
+        }
+
         return(
           <div className="App" 
             style={{backgroundImage: `url(${carfix})`}}>
@@ -90,8 +123,8 @@ class UserProfile extends Component{
             <Marker onClick={this.onMarkerClick}
                     name={'Current location'}
                     style={{color: '#ff7777'}}
-                      lat={40.7473310}
-                      lng={-73.8517440}
+                      lat={6.927079}
+                      lng={79.861244}
                     />
 
             <InfoWindow onClose={this.onInfoWindowClose}>
@@ -109,6 +142,6 @@ class UserProfile extends Component{
 
 
 export default GoogleApiWrapper({
-  apiKey: ("AIzaSyDMMtNaoakN-KNtcut2R2AgOhVJWMAjj7U")
+  apiKey: ("AIzaSyBWNemtQfxzyByYLSHmLltjTbub8UMlElc")
 })(UserProfile)
 
