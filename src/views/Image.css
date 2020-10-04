@@ -64,3 +64,82 @@
     margin-left: 12px;
 }
 
+
+#cardContent{
+    background-color: rgb(253, 253, 253);
+    transition: 0.3s;
+  }
+
+  #rply{
+      margin: 13px;
+  }
+
+  #avatar{
+      background-color: rgb(183, 16, 189);
+      width: 35px;
+      height: 35px;
+
+  }
+
+  #avatarfont{
+      color:rgb(241, 239, 239)
+  }
+
+  #titleContent{
+      background-color: rgb(248, 221, 164);
+      font-weight: bold;
+      color: black;
+      margin-bottom: 10px;
+      margin-top: -10px;
+      padding: 10px;
+      border: none;
+  }
+
+  #titleContent1{
+    background-color: rgb(252, 252, 252);
+    font-weight: bold;
+    color: black;
+    margin-bottom: 10px;
+    margin-top: -10px;
+    padding: 10px;
+    border: none;
+}
+
+.records{
+    background-color: rgb(236, 235, 233);
+    opacity: 0.9;
+    color: black;
+}
+
+#cardbutton1{
+    color: rgb(247, 240, 240);
+    background-color: rgb(183, 16, 189);
+    margin-left: 215px;
+}
+
+#cardbutton2{
+    color: rgb(247, 240, 240);
+    background-color: rgb(183, 16, 189);
+    margin-left: 75px;
+}
+
+#cardbutton{
+    color: rgb(247, 240, 240);
+    background-color: rgb(183, 16, 189);
+    margin-left: 30px;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 10px 10px;
+    border: none;
+    margin: 10px;
+    border-bottom: 0.5px solid rgb(221, 167, 218);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+  }
+  
+  input[type=text]:focus {
+    border-bottom: 1.5px solid rgb(197, 28, 212);
+  }

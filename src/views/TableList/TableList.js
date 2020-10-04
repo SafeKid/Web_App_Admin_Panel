@@ -244,6 +244,7 @@ export default function EnhancedTable() {
   
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
+  const [allRows, setAllRows] = React.useState([]);
   const [rows, setRows] = React.useState([]);
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
@@ -266,6 +267,7 @@ export default function EnhancedTable() {
           
           setRows([]);
           setRows(rows);
+          setAllRows(rows);
         })
       }
     })
@@ -336,6 +338,15 @@ export default function EnhancedTable() {
     setDense(event.target.checked);
   };
 
+  const searchData = (value) => {
+    const filteredData = allRows.filter(row => {
+      const searchTerm = `${row.cname} ${row.pname} ${row.age} ${row.sno} ${row.phoneNo} ${row.user}`;
+      const searchValue = value.toUpperCase();
+      return searchTerm.toUpperCase().indexOf(searchValue) > -1;
+    })
+    setRows(filteredData);
+  }
+
   const isSelected = (date) => selected.indexOf(date) !== -1;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
@@ -355,7 +366,8 @@ export default function EnhancedTable() {
             className: classes.margin + " " + classes.search
           }}
           inputProps={{
-            placeholder: "Search"
+            placeholder: "Search",
+            onChange: (e) => searchData(e.target.value)
           }}
         />
         <Button color="white" aria-label="edit" justIcon round>
@@ -443,3 +455,6 @@ export default function EnhancedTable() {
     </div>
   );
 }
+
+
+

@@ -99,9 +99,9 @@ export default function CardComponent(props) {
     }
     {!respond.length && showInput && <input id="cardinput" type="text" value={reviewRespond} onChange={(event) => setReviewRespond(event.target.value)}/> }
     {!respond.length && showInput && <Button id="cardbutton" onClick={() => handleAdd(key, reviewRespond)}>Add</Button>}
-    {respond.length && !showReply && <Button id="cardbutton1" onClick = {() => setShowReply(true)}>View Reply</Button>}
-    {respond.length && showReply && <Typography variant="body2" color="black" component="p"><p id="rply">{respond}</p></Typography>}
-    {respond.length && showReply && <Button id="cardbutton1" onClick = {() => setShowReply(false)}>Hide Reply</Button>}
+    {respond.length && !showReply ? <Button id="cardbutton1" onClick = {() => setShowReply(true)}>View Reply</Button> : null}
+    {respond.length && showReply ? <Typography variant="body2" color="black" component="p"><p id="rply">{respond}</p></Typography> : null}
+    {respond.length && showReply ? <Button id="cardbutton1" onClick = {() => setShowReply(false)}>Hide Reply</Button> : null}
     </div>
             <IconButton
               className={clsx(classes.expand, {
