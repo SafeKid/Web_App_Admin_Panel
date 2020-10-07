@@ -251,6 +251,17 @@ input[type=text] {
       background-color: rgb(93, 10, 161);
   }
 
+  .material-icons.md-48 { 
+      font-size: 48px;
+      
+ }
+
+ #home {
+     margin-top: -10px;
+     color: yellow;
+     text-align: right;
+ }
+
   * {
     box-sizing: border-box;
     margin: 0;

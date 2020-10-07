@@ -66,6 +66,10 @@ export default function RecipeReviewCard() {
     setExpanded(!expanded);
   };
 
+  const handleBack = () => {
+    window.location.replace("/admin/dashboard");
+  }
+
   const handleAdd = (key, reviewRespond) => {
     firebase.database().ref('Reviews').child(key).update({respond:reviewRespond})
   };
@@ -97,7 +101,13 @@ export default function RecipeReviewCard() {
         style={{
           backgroundImage: `url(${carfix})`
         }}>
-          <h3 className="font-color"><b>User Reviews</b></h3>
+          <h3 className="font-color"><b>User Reviews
+          <IconButton onClick={handleBack}>   
+          <span className="material-icons md-48" id = "home">
+          home
+          </span>
+          </IconButton></b></h3>
+          
       <GridContainer>
      {cards}
     </GridContainer>

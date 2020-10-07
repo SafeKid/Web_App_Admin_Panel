@@ -79,8 +79,13 @@ export default function RecipeReviewCard() {
 const handleAdd = (key, reviewRespond) => {                                                                                                                                                  
   firebase.database().ref('Questions').child(key).update({ respond: reviewRespond })
 
-  
 };
+
+const handleBack = () =>{
+  window.location.replace("/admin/dashboard");
+}
+ 
+
 
   function fetchData() {
     firebase.database().ref('Questions').on('value', (snapshot) => {
@@ -108,11 +113,13 @@ const handleAdd = (key, reviewRespond) => {
         style={{
           backgroundImage: `url(${carfix})`
         }}>
-          <h3 className="font-color"><b>Questions About the Product</b></h3>
-          <DatePicker
-        selected={startDate}
-        onChange={handleChange}
-      />
+          <h3 className="font-color"><b>Questions About the Product
+          <IconButton onClick={handleBack}>   
+          <span className="material-icons md-48" id = "home">
+          home
+          </span>
+          </IconButton></b></h3>
+          
       <GridContainer>
       
       {cards}
