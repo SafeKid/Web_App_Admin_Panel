@@ -27,6 +27,7 @@ import DeviceAdd from './views/Dashboard/Device_add'
 import UserReg from './views/Dashboard/User_reg'
 import Reviews from './views/Typography/Reviews'
 import UserQuestions from './views/Typography/Questions'
+import Login from "./views/Login/login"
 
 // core components
 import Admin from "layouts/Admin.js";
@@ -45,9 +46,10 @@ ReactDOM.render(
       <Route exact path="/Questions" component={UserQuestions}/>
       <Route exact path="/Dashboard" component={Dashboard}/>
       <Route exact path="/Typography" component={Typography}/>
+      <Route exact path ="/login" component={Login}/>
       <Route exact path="/UserProfile" component={UserProfile}/>
       <Route exact path="/TableList" component={TableList}/>
-      <Redirect from="/" to="/admin/dashboard" />
+      <Redirect from="/" to="/login" />
     </Switch>
   </Router>,
   document.getElementById("root")
