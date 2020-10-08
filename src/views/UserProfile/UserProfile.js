@@ -3,7 +3,7 @@ import Users from './Users';
 import AddUser from './AddUser';
 import carfix from "assets/img/coverpage.jpg";
 import firebase from "../../config/firebase.js";
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+//import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import  "views/Image.css";
 
 class UserProfile extends Component{
@@ -113,26 +113,7 @@ class UserProfile extends Component{
                 <AddUser addUser={this.addUser}/>
             </div>
 
-            <Map 
-            google={this.props.google} 
-            zoom={14}
-            onClick={this.onClick}
-            defaultCenter={ this.props.center }        
-            >
- 
-            <Marker onClick={this.onMarkerClick}
-                    name={'Current location'}
-                    style={{color: '#ff7777'}}
-                      lat={6.927079}
-                      lng={79.861244}
-                    />
-
-            <InfoWindow onClose={this.onInfoWindowClose}>
-                {/* <div>
-                  <h1>{this.state.selectedPlace.name}</h1>
-                </div> */}
-            </InfoWindow>
-            </Map>
+           
             </div>
 
 
@@ -141,7 +122,5 @@ class UserProfile extends Component{
 }
 
 
-export default GoogleApiWrapper({
-  apiKey: ("AIzaSyBWNemtQfxzyByYLSHmLltjTbub8UMlElc")
-})(UserProfile)
+export default UserProfile
 
