@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import  "views/Image.css"
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+
 
 class AddUser extends Component{
 

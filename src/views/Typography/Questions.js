@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {Link, withRouter} from 'react-router-dom';
 import DatePicker from "react-datepicker"; 
-import "react-datepicker/dist/react-datepicker.css";
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
