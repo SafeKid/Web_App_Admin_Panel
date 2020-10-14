@@ -4,7 +4,7 @@
 ```
 I have developed all the frontend and backend functionalities related to admin panel of web application. 
 	- Admin Login/logout
-	- Confirm parent's request.
+	- Confirm parents' request and add devices.
 	- Block users.
 	- Add areas where child abuses  have occurred before.
 	- User reviews and Questions about the product.
