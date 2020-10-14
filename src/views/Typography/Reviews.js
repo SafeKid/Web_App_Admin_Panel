@@ -67,7 +67,7 @@ export default function RecipeReviewCard() {
   };
 
   const handleBack = () => {
-    window.location.replace("/admin/dashboard");
+    window.location.replace("/admin/typography");
   }
 
   const handleAdd = (key, reviewRespond) => {

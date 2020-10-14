@@ -40,31 +40,31 @@ class Register extends Component{
       }
 
       onSubmit = event => {
-        //console.log(this.state.email);
         const { email, password } = this.state;
         
+ // -----------------------Connect to the Database----------------------------------       
           firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(function(firebaseUser){
-            //console.log("SUCCESS");
             var user = firebase.auth().currentUser;
             var ref = firebase.database().ref("Users").child(user.uid); 
-            ref.once('value',function (snapshot) {  
+            ref.once('value',function (snapshot)
+            {  
               let type=snapshot.val().type;
-              if(type=="admin"){
-                //console.log("hERER");
-                window.location.replace("/admin/dashboard");
-                
+
+              if(type=="admin")
+              {
+                    alert("Login Successfully");
+                    window.location.replace("/admin/dashboard");
               }
               
-            
             }); 
             
-          }).catch(function(error) {
-            console.log(error.code);
-            alert(error.message);
-         });
+          }).catch(function(error) 
+             {
+                 alert("Invalid User ")
+             });
     
-        event.preventDefault();
-      };
+             event.preventDefault();
+     };
       onChange = event => {
         this.setState({ [event.target.name]: event.target.value });
       };
@@ -95,6 +95,7 @@ class Register extends Component{
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
+          required
         />
         
      
@@ -104,6 +105,7 @@ class Register extends Component{
           onChange={this.onChange}
           type="password"
           placeholder="Password"
+          required
         />
        
         <button disabled={isInvalid} type="submit" className="submitlogin">

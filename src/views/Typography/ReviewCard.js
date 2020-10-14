@@ -86,19 +86,7 @@ export default function ReviewCard(props) {
        </Typography>
           </CardContent>
           <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-              <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-            <span class="material-icons">
-                thumb_up_alt
-              </span>
-            </IconButton>
-            <IconButton aria-label="share">
-            <span class="material-icons">
-                thumb_down_alt
-              </span>
-            </IconButton>
+         
             <div className="rply">
     {!respond.length &&
       <CardActions disableSpacing>
@@ -109,9 +97,9 @@ export default function ReviewCard(props) {
     }
     {!respond.length && showInput && <input id="cardinput" type="text" value={reviewRespond} onChange={(event) => setReviewRespond(event.target.value)}/> }
     {!respond.length && showInput && <Button id="cardbutton" onClick={() => handleAdd(key, reviewRespond)}>Add</Button>}
-    {respond.length && !showReply && <Button id="cardbutton2" onClick = {() => setShowReply(true)}>View Reply</Button>}
-    {respond.length && showReply && <Typography variant="body2" color="black" component="p"><p id="rply">{respond}</p></Typography>}
-    {respond.length && showReply && <Button id="cardbutton2" onClick = {() => setShowReply(false)}>Hide Reply</Button>}
+    {respond.length && !showReply ? <Button id="cardbutton2" onClick = {() => setShowReply(true)}>View Reply</Button> : null}
+    {respond.length && showReply ? <Typography variant="body2" color="black" component="p"><p id="rply">{respond}</p></Typography> : null}
+    {respond.length && showReply ? <Button id="cardbutton2" onClick = {() => setShowReply(false)}>Hide Reply</Button> : null}
     </div>
             <IconButton
               className={clsx(classes.expand, {
