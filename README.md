@@ -2,8 +2,8 @@
 
 **My Contribution**
 ```
-I'm still developing all the frontend and backend functionalities related to admin panel of web application. 
-There are four main functionalities.
+I have developed all the frontend and backend functionalities related to admin panel of web application. 
+	- Admin Login/logout
 	- Confirm parent's request.
 	- Block users.
 	- Add areas where child abuses  have occurred before.
@@ -35,9 +35,10 @@ npm i firebase
 npm start
 ```
 
-![pic1](https://user-images.githubusercontent.com/54970999/89748629-bb1da380-dae1-11ea-97c1-89800899087c.PNG)
-![pic4](https://user-images.githubusercontent.com/54970999/89724448-adecb000-da20-11ea-8790-3313d8c0e6aa.PNG)
+![ss1](https://user-images.githubusercontent.com/54970999/95942106-f7ca8b80-0dff-11eb-8925-cdd9289998af.PNG)
+![ss7](https://user-images.githubusercontent.com/54970999/95942159-14ff5a00-0e00-11eb-9f3d-1a728a5b6dff.PNG)
 ![pic5](https://user-images.githubusercontent.com/54970999/89724453-b0e7a080-da20-11ea-9819-863be5a8a9b8.PNG)
-![pic6](https://user-images.githubusercontent.com/54970999/89724467-0328c180-da21-11ea-8dde-caed3bbc313f.PNG)
-![pic7](https://user-images.githubusercontent.com/54970999/89724454-b349fa80-da20-11ea-827f-fe62c53adc40.PNG)
-![pic8](https://user-images.githubusercontent.com/54970999/89724457-b6dd8180-da20-11ea-8669-23a77fee542d.PNG)
+![ss2](https://user-images.githubusercontent.com/54970999/95942129-03b64d80-0e00-11eb-8804-17ab59e4905b.PNG)
+![ss4](https://user-images.githubusercontent.com/54970999/95942134-087b0180-0e00-11eb-8170-e39b3440fd92.PNG)
+![ss5](https://user-images.githubusercontent.com/54970999/95942634-4d536800-0e01-11eb-820f-084bedb69ca0.PNG)
+![ss6](https://user-images.githubusercontent.com/54970999/95942641-52b0b280-0e01-11eb-92f4-6de53346c622.PNG)
